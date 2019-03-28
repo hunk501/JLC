@@ -8,11 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>JLC - Construction Services</title>
+    <title>JLC - Services</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -30,7 +30,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        JLC - Construction Services
+                        JLC - Services
                     </a>
                 </div>
 
@@ -53,10 +53,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="">Menu 1</a></li>
-                                    <li><a href="">Menu 2</a></li>
-                                    <li><a href="">Menu 3</a></li>
-                                    <li><a href="">Menu 4</a></li>
+                                    <li><a href="{{ url('category') }}">Product Category</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

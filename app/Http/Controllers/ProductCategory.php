@@ -17,7 +17,7 @@ class ProductCategory extends Controller
 
         // Lists 
         $records = MdlProductCategory::all();
-        //dd($records);
+        //dd(count($records));
         return view('category.category_lists')->with(['records'=>$records]);
     }
 

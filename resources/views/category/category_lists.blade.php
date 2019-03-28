@@ -29,7 +29,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($records))
+                                    @if(count($records))
                                         @foreach($records as $record)
                                         <tr style="cursor: pointer;" data-id="{{ $record->pc_id }}">
                                             <td>{{ $record->pc_id }}</td>
@@ -37,6 +37,8 @@
                                             <td>{{ $record->image_url }}</td>
                                         </tr>
                                         @endforeach
+                                    @else
+                                    <tr><td colspan="3">No records</td></tr>
                                     @endif                                
                                 </tbody>
                             </table>

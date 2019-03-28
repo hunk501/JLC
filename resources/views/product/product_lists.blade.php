@@ -30,7 +30,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($records))
+                                    @if(count($records))
                                         @foreach($records as $record) 
                                             <tr>
                                                 <td>{{ $record->name }}</td>
@@ -44,6 +44,8 @@
                                                 </td>                                                
                                             </td>
                                         @endforeach
+                                    @else 
+                                    <tr><td colspan="3">No records</td></tr>
                                     @endif
                                 </tbody>
                             </table>
