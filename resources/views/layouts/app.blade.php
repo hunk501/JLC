@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 </head>
 <body>
     <div id="app">

@@ -23,6 +23,15 @@ Route::get('/admin', function(){
 });
 
 
+// Products
+Route::get('/product/{id}', 'Products@lists')->name('product');
+Route::any('/product/add/{id}', 'Products@add');
+
+// Category
+Route::any('/category', 'ProductCategory@lists')->name('category');
+Route::any('/category/form', 'ProductCategory@form');
+
+
 // Application
 Route::get('/application', 'Application@index')->name('application');
 Route::post('/application/compute', 'Application@compute');
