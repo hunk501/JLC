@@ -30,5 +30,6 @@ class CreateTableProductCategory extends Migration
     public function down()
     {
         Schema::dropIfExists('tbl_product_category');
+        
     }
 }
