@@ -80,61 +80,13 @@
                 <nav>
                   <ul class="nav topnav">
                     <li class="dropdown active">
-                      <a href="index.html"><i class="icon-home"></i> Home <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="">Homepage 2</a></li>
-                        <li><a href="">Homepage 3</a></li>
-                        <li><a href="">Parallax slider</a></li>
-                        <li><a href="">Landing page</a></li>
-                      </ul>
+                      <a href="{{ url('/') }}"><i class="icon-home"></i> Home </a>                    
                     </li>
                     <li class="dropdown">
-                      <a href="#">Features <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="">Typography</a></li>
-                        <li><a href="">Components</a></li>
-                        <li><a href="">Icons</a></li>
-                        <li><a href="">Icon variations</a></li>
-                        <li class="dropdown"><a href="#">3rd menus<i class="icon-angle-right"></i></a>
-                          <ul class="dropdown-menu sub-menu-level1">
-                            <li><a href="">Sub menu</a></li>
-                            <li><a href="">Sub menu</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#">Pages <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="">About us</a></li>
-                        <li><a href="">FAQ</a></li>
-                        <li><a href="">Team</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">Pricing boxes</a></li>
-                        <li><a href="">404</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#">Portfolio <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="">Portfolio 2 columns</a></li>
-                        <li><a href="">Portfolio 3 columns</a></li>
-                        <li><a href="">Portfolio 4 columns</a></li>
-                        <li><a href="">Portfolio detail</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#">Blog <i class="icon-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="">Blog left sidebar</a></li>
-                        <li><a href="">Blog right sidebar</a></li>
-                        <li><a href="">Blog fullwidth</a></li>
-                        <li><a href="">Post left sidebar</a></li>
-                        <li><a href="">Post right sidebar</a></li>
-                      </ul>
+                      <a href="{{ url('products') }}"><i class="icon-list"></i> Products </a>                    
                     </li>
                     <li>
-                      <a href="{{ url('/login') }}">Sign In </a>
+                      <a href="{{ url('/login') }}"><i class="icon-user"></i> Sign In </a>
                     </li>
                   </ul>
                 </nav>

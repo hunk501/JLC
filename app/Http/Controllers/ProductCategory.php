@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Validator;
 use App\MdlProductCategory;
+use App\MdlProduct;
 
 class ProductCategory extends Controller
 {
@@ -39,6 +40,49 @@ class ProductCategory extends Controller
         }
 
         return view('category.category_form');        
+    }
+
+    public function delete(Request $request) {  
+        $output = [];      
+        if( $request->input('pc_id') && $request->input('_token') ) {        
+
+            // Remove Product Category
+            $pcat = MdlProductCategory::whereIn('pc_id', $request->input('pc_id'));
+            $pcat->delete();
+            
+            // Remove Products
+            $pd = MdlProduct::whereIn('pc_idfk', $request->input('pc_id'));
+            $pd->delete();
+            
+            $output['success'] = true;
+            $output['msg'] = 'Product Category has been remove!';
+        } else {
+            $output['success'] = false;
+            $output['msg'] = 'Invalid request';
+        }        
+        echo json_encode($output);
+    }
+
+    public function edit(Request $request, $pc_id) {
+        $category = MdlProductCategory::find($pc_id);
+        if(empty($category)) { die("WALA"); }
+
+        if($request->isMethod('post')) {
+            $rules = $this->getRules();
+            $rules['name'] = 'required';
+
+            // Validate inputs
+            Validator::make($request->all(), $rules)->validate();
+            
+            $category->name = $request->input('name');
+            $category->image_url = $request->input('image');
+            $category->save();
+
+            Session::flash('success', 'Category has been updated!');
+            return redirect('category');
+        }
+
+        return view('category.category_edit')->with(['pc_id'=>$pc_id,'category'=>$category]);
     }
 
     private function getRules() {

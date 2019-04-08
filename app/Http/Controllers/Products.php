@@ -49,6 +49,45 @@ class Products extends Controller
         return view('product.product_form')->with(['pc_id'=>$pc_id,'pc_name'=>$category->name]);
     }
 
+    public function edit(Request $request, $pc_id, $p_id) {
+        $category = MdlProductCategory::find($pc_id);
+        $product = MdlProduct::find($p_id);
+        
+        if(empty($category) || empty($product)) { die('Wala'); }
+
+        if($request->isMethod('post')) {
+            // Validate inputs
+            Validator::make($request->all(), $this->getRules())->validate();
+            
+            $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->image_url = $request->input('image');
+            $product->stock = $request->input('stock');
+            $product->save();
+
+            Session::flash('success', 'Product has been updated!');
+            return redirect('product'.'/'.$pc_id);
+        }
+
+        return view('product.product_edit')->with(['pc_id'=>$pc_id,'p_id'=>$p_id,'pc_name'=>$category->name,'product'=>$product]);
+    }
+
+    public function delete(Request $request) {  
+        $output = [];      
+        if( $request->input('p_id') && $request->input('_token') ) {        
+
+            $p = MdlProduct::whereIn('p_id', $request->input('p_id'));
+            $p->delete();            
+            
+            $output['success'] = true;
+            $output['msg'] = 'Products has been remove!';
+        } else {
+            $output['success'] = false;
+            $output['msg'] = 'Invalid request';
+        }        
+        echo json_encode($output);
+    }
+
     // |unique:tbl_insurance'
     protected function getRules() {
         return [

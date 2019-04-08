@@ -17,12 +17,12 @@
                         Product Category Details
                     </div>
                     <!-- /.panel-heading -->
-                    <form method="POST" action="{{ url('category/form') }}">
+                    <form method="POST" action="{{ url('category/edit') .'/'. $pc_id }}">
                         <div class="panel-body">
                             <div class="form-group">
                                 <label>Name:</label>
                                 <div class="form-action">
-                                    <input type="text" name="name" value="{{ old('name') }}">
+                                    <input type="text" name="name" value="{{ $category->name }}">
                                     @if($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label>Image:</label>
                                 <div class="form-action">
-                                    <input type="text" name="image" value="{{ old('image') }}">
+                                    <input type="text" name="image" value="{{ $category->image_url }}">
                                     @if($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success">Submit</button>
+                                <button class="btn btn-success">Update Category</button>
                             </div>
                         </div>
                         {{ csrf_field() }}

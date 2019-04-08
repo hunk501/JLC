@@ -12,4 +12,8 @@ class MdlProductCategory extends Model
 
     protected $guarded = [];
 
+
+    public function getProducts() {
+        return $this->hasMany('App\MdlProduct', 'pc_idfk', 'pc_id');
+    }
 }
