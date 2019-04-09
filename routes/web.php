@@ -29,12 +29,23 @@ Route::any('/product/add/{id}', 'Products@add');
 Route::any('/product/edit/{pc_id}/{p_id}', 'Products@edit');
 Route::post('/product/delete', 'Products@delete');
 
-// Category
+// CMS Category
 Route::any('/category', 'ProductCategory@lists')->name('category');
 Route::any('/category/form', 'ProductCategory@form');
 Route::post('/category/delete', 'ProductCategory@delete');
 Route::any('/category/edit/{pc_id}', 'ProductCategory@edit');
 
+// CMS Rental Category
+Route::any('/rent_cat', 'RentalCategory@lists');
+Route::any('/rent_cat/form', 'RentalCategory@form');
+Route::post('/rent_cat/delete', 'RentalCategory@delete');
+Route::any('/rent_cat/edit/{rc_id}', 'RentalCategory@edit');
+
+// CMS Rental Products
+Route::get('/rent_prod/{id}', 'RentalProduct@lists');
+Route::any('/rent_prod/add/{id}', 'RentalProduct@add');
+Route::any('/rent_prod/edit/{pc_id}/{p_id}', 'RentalProduct@edit');
+Route::post('/rent_prod/delete', 'RentalProduct@delete');
 
 // Application
 Route::get('/application', 'Application@index')->name('application');
@@ -43,4 +54,7 @@ Route::post('/application/compute', 'Application@compute');
 
 // Home Products
 Route::get('/products', 'HomeProducts@index');
+Route::get('/rental', 'HomeRental@index');
+Route::get('/rental/view/{id}', 'HomeRental@view');
+
 

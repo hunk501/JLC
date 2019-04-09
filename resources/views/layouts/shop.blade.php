@@ -81,8 +81,11 @@
                     <li class="dropdown">
                       <a href="{{ url('/') }}"><i class="icon-home"></i> Home</a>
                     </li>
-                    <li class="dropdown active">
+                    <li class="dropdown">
                       <a href="{{ url('products') }}"><i class="icon-list"></i> Products </a>                    
+                    </li>
+                    <li>
+                      <a href="{{ url('rental') }}"><i class="icon-list"></i> Rental </a>
                     </li>
                     <li>
                       <a href="{{ url('/login') }}">Sign In </a>
@@ -98,22 +101,8 @@
     </header>
     <!-- end header -->
 
-    <section id="inner-headline">
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <div class="inner-heading">
-              <ul class="breadcrumb">
-                <li><a href="index.html">Home</a> <i class="icon-angle-right"></i></li>
-                <li class="active">Products</li>
-              </ul>
-              <h2>Products</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
+    @yield('breadcrumb')
+
     @yield('content')
 
     <footer>

@@ -54,6 +54,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('category') }}">Product Category</a></li>
+                                    <li><a href="{{ url('rent_cat') }}">Rental</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

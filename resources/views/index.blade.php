@@ -86,6 +86,9 @@
                       <a href="{{ url('products') }}"><i class="icon-list"></i> Products </a>                    
                     </li>
                     <li>
+                      <a href="{{ url('rental') }}"><i class="icon-list"></i> Rental </a>
+                    </li>
+                    <li>
                       <a href="{{ url('/login') }}"><i class="icon-user"></i> Sign In </a>
                     </li>
                   </ul>
