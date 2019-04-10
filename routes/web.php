@@ -56,5 +56,14 @@ Route::post('/application/compute', 'Application@compute');
 Route::get('/products', 'HomeProducts@index');
 Route::get('/rental', 'HomeRental@index');
 Route::get('/rental/view/{id}', 'HomeRental@view');
+Route::post('/rental/add_to_cart', 'HomeRental@add_to_cart');
+
+Route::get('/cart', 'Cart@index');
+Route::post('/cart/update', 'Cart@update');
+
+Route::get('/checkout/confirm', 'Checkout@confirm');
+Route::get('/checkout/thankyou', 'Checkout@thankyou');
+
+Route::get('/orders', 'Orders@lists');
 
 

@@ -20,6 +20,15 @@
 
   <!-- Theme skin -->
   <link href="{{ asset('color/default.css') }}" rel="stylesheet" />
+  <style>
+  .modal.fade.in {
+    top: 30%;
+  }
+  </style>
+
+
+  <script src="{{ asset('js/jquery.js') }}"></script>
+  <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
 
   <!-- Fav and touch icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('ico/apple-touch-icon-144-precomposed.png') }}" />
@@ -50,13 +59,14 @@
             </div>
             <div class="span6">
 
-              <ul class="social-network">
-                <li><a href="#" data-placement="bottom" title="Facebook"><i class="icon-facebook icon-white"></i></a></li>
-                <li><a href="#" data-placement="bottom" title="Twitter"><i class="icon-twitter icon-white"></i></a></li>
-                <li><a href="#" data-placement="bottom" title="Linkedin"><i class="icon-linkedin icon-white"></i></a></li>
-                <li><a href="#" data-placement="bottom" title="Pinterest"><i class="icon-pinterest  icon-white"></i></a></li>
-                <li><a href="#" data-placement="bottom" title="Google +"><i class="icon-google-plus icon-white"></i></a></li>
-                <li><a href="#" data-placement="bottom" title="Dribbble"><i class="icon-dribbble icon-white"></i></a></li>
+              <ul class="social-network">                
+                <li>
+                  <a href="{{ url('/cart') }}" data-placement="bottom" title="My Cart">
+                  <i class="icon-shopping-cart icon-white"></i> 
+                  <span class="badge">{{ (session('total_qty') ? session('total_qty') : 0) }}</span>
+                  </a>
+                </li>
+                <li><a href="{{ url('/login') }}" class="icon-white">My Account</a></li>
               </ul>
 
             </div>
@@ -114,7 +124,7 @@
               <ul class="link-list">
                 <li><a href="#">Our company</a></li>
                 <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#icon-rocket icon-white">Privacy policy</a></li>
                 <li><a href="#">Press release</a></li>
                 <li><a href="#">What we have done</a></li>
                 <li><a href="#">Our support forum</a></li>
@@ -182,9 +192,7 @@
 
   <!-- javascript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="{{ asset('js/jquery.js') }}"></script>
-  <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+  <!-- Placed at the end of the document so the pages load faster -->  
   <script src="{{ asset('js/bootstrap.js') }}"></script>
 
   <script src="{{ asset('js/modernizr.custom.js') }}"></script>

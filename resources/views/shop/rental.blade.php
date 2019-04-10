@@ -56,9 +56,8 @@
                                             <p>{{ ucfirst($product['name']) }}</p>
                                             <div class="meta-post">
                                                 <ul>                                                    
-                                                    <li><a href=""></a></li>
-                                                    <li>Status: <a href="{{ url('rental').'/view/'. $product['rp_id'] }}">Active</a></li>
-                                                    <li>Rate: <a href="{{ url('rental').'/view/'. $product['rp_id'] }}">Php{{ $product['rental_rate']}}/{{ ($product['rental_type']==1)?'day':'hour' }}</a></li>
+                                                    <li><a href=""></a></li>                                                    
+                                                    <li>Rate: <a href="{{ url('rental').'/view/'. $product['rp_id'] }}">Php {{ $product['rental_rate']}}/{{ ($product['rental_type']==1)?'day':'hour' }}</a></li>
                                                 </ul>
                                             </div>
                                         </div>

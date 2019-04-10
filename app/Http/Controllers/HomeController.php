@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $from_checkout = session('from_checkout');
+        if(!empty($from_checkout)) {            
+            return redirect('/checkout/confirm');
+        } else {
+            return view('home');
+        }        
     }
 }

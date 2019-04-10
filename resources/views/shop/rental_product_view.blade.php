@@ -50,12 +50,17 @@
                             <ul>
                             <li></li>
                             <li>Status: <a href="#">Active</a></li>
+                            <li>Stock: <a href="#">{{ $product->stock }}</a></li>
                             <li>Rate: <a href="#">Php {{ $product->rental_rate }}/{{ ($product->rental_type==1)?'day':'hour' }}</a></li>
                             </ul>
                         </div>
                         <div class="post-entry">
                             <p>{{ $product->description }}</p>
-                            <a href="#" class="btn btn-primary"><i class="icon-rocket icon-white"></i> Add to Cart</a>
+                            @if($product->stock)
+                            <a href="#" class="add-to-cart btn btn-primary"><i class="icon-shopping-cart"></i> Add to Cart</a>
+                            @else
+                            <span class="badge">Out of Stock</span>
+                            @endif
                         </div>
                         </div>
                     </div>
@@ -65,4 +70,66 @@
         </div>
     </div>
 </section>
+
+<!-- Info Modal -->
+<div id="mdlInfo" class="modal fade" role="dialog" style="display: none;">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+      </div>
+      <div class="modal-body">
+        <p>Product has been added to cart!</p>
+      </div>
+      <div class="modal-footer">        
+        <a href="{{ url('/rental') }}" class="btn btn-primary">View other products</a>
+        <a href="{{ url('/cart') }}" class="btn btn-success">View my cart</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{{ csrf_field() }}
+
+<script>
+$(document).ready(function(){
+
+    $(".add-to-cart").click(function(e){
+        e.preventDefault();
+
+        var _data = {
+            'rp_id': '{{ $product->rp_id }}',
+            '_token': $("input[name=_token]").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('/rental/add_to_cart') }}",
+            data: _data,
+            dataType: 'json',
+            beforeSend: function() {
+
+            },
+            success: function(json) {
+                $('#mdlInfo').modal();
+                console.log(json);                
+            },
+            error: function(e) {
+
+            },
+            complete: function() {
+                
+            }
+        });
+    });
+
+    // modal
+    $("#mdlInfo").on('hidden.bs.modal', function(){        
+        window.location.reload();
+    });
+});
+</script>
 @endsection
