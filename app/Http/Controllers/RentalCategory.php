@@ -11,7 +11,7 @@ use App\MdlRentalProduct;
 class RentalCategory extends Controller
 {
     public function __construct() {        
-        
+        $this->middleware('auth');    
     }
 
     public function lists() {
