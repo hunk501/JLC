@@ -97,7 +97,16 @@
                     </li>
                     <li class="dropdown {{ (!empty($page_name) && $page_name=='rental')?'active':'' }} ">
                       <a href="{{ url('rental') }}"><i class="icon-list"></i> Rental </a>
-                    </li>                    
+                    </li>
+                    <li class="dropdown">
+                      <a href="{{ url('/') }}"><i class="icon-home"></i> Services</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="{{ url('/') }}"><i class="icon-home"></i> Design</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="{{ url('/') }}"><i class="icon-home"></i> Projects</a>
+                    </li>
                   </ul>
                 </nav>
               </div>
