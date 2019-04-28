@@ -43,7 +43,10 @@
                                     @if(count($records))
                                         @foreach($records as $record)
                                         <tr id="pcid_{{ $record->transaction_id }}">
-                                            <td><input type="checkbox" class="chk" name="chk[]" value="{{ $record->transaction_id }}"/></td>                                            
+                                            <td>
+                                                @if($record->status <= 0)
+                                                <input type="checkbox" class="chk" name="chk[]" value="{{ $record->transaction_id }}"/></td>
+                                                @endif                                            
                                             <td>AP-{{ $record->transaction_id }}</td>
                                             <td>{{ number_format(($record->getProduct->rental_rate * $record->qty), 2) }}</td>
                                             <td>{{ $record->qty }}</td>

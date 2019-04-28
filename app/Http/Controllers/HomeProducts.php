@@ -15,6 +15,25 @@ class HomeProducts extends Controller
         $default_link_id = 0;
         $output = [];
         
+        $content = [
+            'breadcrumb' => [
+                [
+                    'label' => "Home",
+                    'href'  => url('/'),
+                    'class' => ''
+                ],
+                [
+                    'label' => "Products",
+                    'href'  => url('products'),
+                    'class' => 'active'
+                ]
+            ],
+            'title' => 'Products'
+        ];        
+        $output['content'] = $content;
+        $output['page_name'] = 'products';
+
+        
         $categories = MdlProductCategory::all();
         $output['categories'] = $categories;
 
@@ -29,6 +48,7 @@ class HomeProducts extends Controller
 
             //dd(DB::getQueryLog());
             $output['search'] = $pd;
+            //dd(count($pd));
         }
         else {
             // Set the default lists for products
