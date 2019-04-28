@@ -33,8 +33,8 @@ class HomeProducts extends Controller
         $output['content'] = $content;
         $output['page_name'] = 'products';
 
-        
-        $categories = MdlProductCategory::all();
+        // Show where page_type = NULL only
+        $categories = MdlProductCategory::whereNull('page_type')->get();
         $output['categories'] = $categories;
 
         if($request->input('pcid')) { // Check if Categories exists

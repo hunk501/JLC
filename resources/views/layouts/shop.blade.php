@@ -96,16 +96,13 @@
                       <a href="{{ url('products') }}"><i class="icon-list"></i> Products </a>                    
                     </li>
                     <li class="dropdown {{ (!empty($page_name) && $page_name=='rental')?'active':'' }} ">
-                      <a href="{{ url('rental') }}"><i class="icon-list"></i> Rental </a>
+                      <a href="{{ url('rental') }}"><i class="icon-code-fork"></i> Rental </a>
                     </li>
-                    <li class="dropdown">
-                      <a href="{{ url('/') }}"><i class="icon-home"></i> Services</a>
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='services')?'active':'' }} ">
+                      <a href="{{ url('services') }}"><i class="icon-cog"></i> Services</a>
                     </li>
-                    <li class="dropdown">
-                      <a href="{{ url('/') }}"><i class="icon-home"></i> Design</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="{{ url('/') }}"><i class="icon-home"></i> Projects</a>
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='projects')?'active':'' }} ">
+                      <a href="{{ url('projects') }}"><i class="icon-cogs"></i> Projects</a>
                     </li>
                   </ul>
                 </nav>

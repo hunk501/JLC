@@ -69,4 +69,10 @@ Route::get('/checkout/thankyou', 'Checkout@thankyou');
 
 Route::get('/orders', 'Orders@lists');
 
+Route::get('/services', 'HomeServices@index');
+Route::get('/services/view/{id}', 'HomeServices@view');
+
+Route::get('/projects', 'HomeProjects@index');
+Route::get('/projects/view/{id}', 'HomeProjects@view');
+
 

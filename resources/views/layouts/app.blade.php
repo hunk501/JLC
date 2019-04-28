@@ -54,7 +54,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     @if(Auth::user()->user_level == 1)
-                                    <li><a href="{{ url('category') }}">Product Category</a></li>
+                                    <li><a href="{{ url('category') }}">Categories</a></li>
                                     <li><a href="{{ url('rent_cat') }}">Rental</a></li>
                                     <li><a href="{{ url('sales') }}">Reports</a></li>
                                     @elseif(Auth::user()->user_level == 2)

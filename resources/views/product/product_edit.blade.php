@@ -7,7 +7,7 @@
             <div class="col-lg-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('category') }}">Product Category</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('category') }}">Categories</a></li>
                         <li class="breadcrumb-item"><a href="{{ url('product') .'/'. $pc_id }}">{{ ucfirst($pc_name) }}</a></li>
                     </ol>
                 </nav> 
