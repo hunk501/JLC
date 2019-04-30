@@ -41,7 +41,7 @@
                             <h3><a href="#">{{ ucfirst($product->name) }}</a></h3>
                             </div>
 
-                            <img src="{{ asset('img/dummies/team/4.jpg') }}" alt="" />
+                            <img src="{{ asset('/img') .'/'. $product->image_url }}" alt="" />
                         </div>
 
                         </div>

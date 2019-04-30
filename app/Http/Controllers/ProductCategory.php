@@ -32,7 +32,7 @@ class ProductCategory extends Controller
             // Create product category
             MdlProductCategory::create([
                 'name' => $request->input('name'),
-                'image_url' => $request->input('image')
+                'image_url' => NULL
             ]);
 
             Session::flash('success', 'Product Category has been created!');
@@ -75,7 +75,7 @@ class ProductCategory extends Controller
             Validator::make($request->all(), $rules)->validate();
             
             $category->name = $request->input('name');
-            $category->image_url = $request->input('image');
+            $category->image_url = NULL;//$request->input('image');
             $category->save();
 
             Session::flash('success', 'Category has been updated!');

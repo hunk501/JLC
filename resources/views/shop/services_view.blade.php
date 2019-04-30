@@ -38,7 +38,7 @@
                     </div>
                     <!-- start flexslider -->
                     <div class="portfolio-detail">
-                        <img src="{{ asset('img/dummies/team/1.jpg') }}" alt="" />
+                        <img src="{{ asset('/img') .'/'. $product->image_url }}" alt="" />
                     </div>
                     <!-- end flexslider -->
                     </div>

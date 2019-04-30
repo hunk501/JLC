@@ -80,7 +80,7 @@
                                         <h3><a href="#">{{ $product->name }}</a></h3>
                                     </div>
 
-                                    <img src="img/dummies/blog/img1.jpg" alt="" />
+                                    <img src="{{ asset('/img') .'/'. $product->image_url }}" alt="" />
                                 </div>
                                 <div class="meta-post">
                                     <ul>                            
@@ -110,7 +110,7 @@
                                             <h3><a href="#">{{ $product->name }}</a></h3>
                                         </div>
 
-                                        <img src="img/dummies/blog/img1.jpg" alt="" />
+                                        <img src="{{ asset('/img') .'/'. $product->image_url }}" alt="" />
                                     </div>
                                     <div class="meta-post">
                                         <ul>                            

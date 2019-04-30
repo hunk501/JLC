@@ -18,7 +18,7 @@
                         Product Details
                     </div>
                     <!-- /.panel-heading -->
-                    <form method="POST" action="{{ url('product/add') .'/'. $pc_id }}">
+                    <form method="POST" action="{{ url('product/add') .'/'. $pc_id }}" enctype="multipart/form-data">
                         <div class="panel-body">
                             <div class="form-group">
                                 <label>Name:</label>
@@ -34,10 +34,10 @@
                             <div class="form-group">
                                 <label>Image:</label>
                                 <div class="form-action">
-                                    <input type="text" name="image" value="{{ old('image') }}">
-                                    @if($errors->has('image'))
+                                    <input type="file" name="images">
+                                    @if($errors->has('images'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('image') }}</strong>
+                                        <strong>{{ $errors->first('images') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -29,18 +29,7 @@
                                     </span>
                                     @endif
                                 </div>
-                            </div>                
-                            <div class="form-group">
-                                <label>Image:</label>
-                                <div class="form-action">
-                                    <input type="text" name="image" value="{{ old('image') }}">
-                                    @if($errors->has('image'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('image') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            </div> 
                             <div class="form-group">
                                 <button class="btn btn-success">Submit</button>
                             </div>

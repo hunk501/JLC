@@ -34,14 +34,29 @@ class RentalProduct extends Controller
 
         if($request->isMethod('post') && !empty($rc_id)) {
 
+            $filename = NULL;
+            $rules = $this->getRules();
+            $hasFiles = FALSE;
+
+            if($request->hasFile('images')) {                
+                $hasFiles = TRUE;
+                $rules['images'] = 'mimes:jpg,png,gif';
+            }            
+
             // Validate inputs
-            Validator::make($request->all(), $this->getRules())->validate();            
+            Validator::make($request->all(), $rules)->validate();            
+
+            // Files
+            if($hasFiles) {                
+                $filename = $this->uploadFiles($request);                
+            }
+            
             // Create Product
             MdlRentalProduct::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'rc_idfk' => $rc_id,
-                'image_url' => $request->input('image_url'),
+                'image_url' => $filename,
                 'stock' => $request->input('stock'),
                 'status' => 1,
                 'rental_type' => $request->input('rental_type'),
@@ -65,11 +80,25 @@ class RentalProduct extends Controller
             $rules = $this->getRules();
             $rules['name'] = 'required';
 
+            $filename = NULL;            
+            $hasFiles = FALSE;
+
+            if($request->hasFile('images')) {                
+                $hasFiles = TRUE;
+                $rules['images'] = 'mimes:jpg,png,gif';
+            }
+
             Validator::make($request->all(), $rules)->validate();
+
+            // Files
+            if($hasFiles) {                            
+                $filename = $this->uploadFiles($request);
+
+                $product->image_url = $filename;
+            }
             
             $product->name = $request->input('name');
-            $product->description = $request->input('description');
-            $product->image_url = $request->input('image_url');
+            $product->description = $request->input('description');            
             $product->stock = $request->input('stock');
             $product->rental_type = $request->input('rental_type');
             $product->rental_rate = $request->input('rental_rate');            
@@ -106,5 +135,23 @@ class RentalProduct extends Controller
             'rental_rate' => 'required|numeric',
             'rental_type' => 'required',
         ];        
+    }
+
+    public function uploadFiles($request) {
+
+        if( $request->hasFile('images') ) {
+            
+            $images = $request->file('images');
+
+            $filename = time() .'.'. $images->getClientOriginalExtension();
+            $destination_path = public_path('/img');
+            //$path = $request->file('images')->storeAs('images', $filename );
+
+            $images->move($destination_path, $filename);
+
+            return $filename;
+        }
+
+        return NULL;
     }
 }

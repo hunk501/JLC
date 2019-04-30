@@ -51,7 +51,7 @@
                                 <li class="item-thumbs span3 rc_id_{{ $product['rc_idfk'] }}" data-id="id-0" data-type="rc_id_{{ $product['rc_idfk'] }}">
                                     <a href="{{ url('rental').'/view/'. $product['rp_id'] }}">
                                     <div class="team-box thumbnail">
-                                        <img src="{{ asset('img/dummies/team/4.jpg') }}" alt="" />
+                                        <img src="{{ asset('/img') .'/'. $product['image_url'] }}" alt="" />
                                         <div class="caption">                                        
                                             <p>{{ ucfirst($product['name']) }}</p>
                                             <div class="meta-post">

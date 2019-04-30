@@ -51,7 +51,7 @@
                     <a href="{{ url('projects/view') .'/'. $product->p_id }}">                    
                         <div class="service-box aligncenter {{ $product->animation }}">
                             <div class="icon">
-                                <img src="{{ asset('img/dummies/works/1.jpg') }}" alt="" />
+                                <img src="{{ asset('/img') .'/'. $product->image_url }}" alt="" />
                             </div>
                             <h5><span class="colored">{{ $product->name }}</span></h5>                        
                         </div>
