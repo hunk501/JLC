@@ -6,16 +6,20 @@
     <div class="row">
             <div class="col-lg-12">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('category') }}">Categories</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ ucfirst($pc_name) }}</li>
+                    @if(Auth::user()->user_level == 1)
+                    <ol class="breadcrumb">                        
+                        <li class="breadcrumb-item active" aria-current="page">Reports</li>
                     </ol>
+                    @else
+                    <ol class="breadcrumb">                        
+                        <li class="breadcrumb-item active" aria-current="page">My Application</li>
+                    </ol>
+                    @endif                    
                 </nav> 
             </div>
             <div class="col-lg-12">
                 <div class="panel panel-default">                    
-                    <div class="panel-heading">
-                        <a class="btn btn-success" href="{{ url('product/add') .'/'. $pc_id  }}">Add New</a> &nbsp;&nbsp;
+                    <div class="panel-heading">                        
                         @if(count($records))
                         <button id="remove" class="btn btn-danger">Remove</button>
                         @endif
@@ -26,33 +30,44 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox" id="check-all"/></th>                                        
-                                        <th>Name</th>
-                                        <th>Stock</th>
+                                        <th><input type="checkbox" id="check-all"></th>                                        
+                                        <th>ID</th>
+                                        <th>Amount</th>  
+                                        <th>Qty</th>
+                                        <th>Date Added</th>
                                         <th>Status</th>
-                                        <th></th>
+                                        <th></th>                                      
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if(count($records))
-                                        @foreach($records as $record) 
-                                            <tr id="pid_{{ $record->p_id }}">
-                                                <td><input type="checkbox" class="chk" name="chk[]" value="{{ $record->p_id }}"/></td>
-                                                <td>{{ $record->name }}</td>
-                                                <td>{{ $record->stock }}</td>
-                                                <td>
-                                                    @if($record->status == 1)
-                                                    <span class="badge badge-success">Active</span>
-                                                    @else 
-                                                    <span class="badge badge-danger">Disabled</span>
-                                                    @endif
-                                                </td>
-                                                <td><a href="{{ url('product') ."/edit/". $pc_id ."/". $record->p_id }}">[Edit]</a></td>                        
+                                        @foreach($records as $record)
+                                        <tr id="pcid_{{ $record->transaction_id }}">
+                                            <td>
+                                                @if($record->status <= 0)
+                                                <input type="checkbox" class="chk" name="chk[]" value="{{ $record->transaction_id }}"/></td>
+                                                @endif                                            
+                                            <td>AP-{{ $record->transaction_id }}</td>
+                                            <td>{{ number_format(($record->getProduct->rental_rate * $record->qty), 2) }}</td>
+                                            <td>{{ $record->qty }}</td>
+                                            <td>{{ date('Y-m-d h:i:s a', strtotime($record->created_at)) }}</td>
+                                            <td>
+                                                @if($record->status <= 0)
+                                                Pending
+                                                @elseif($record->status == 1)
+                                                Approved
+                                                @elseif($record->status == 2)
+                                                Declined
+                                                @endif
                                             </td>
+                                            <td>
+                                                <a href="{{ url('sales') .'/edit/'. $record->transaction_id }}">[View]</a>
+                                            </td>
+                                        </tr>
                                         @endforeach
-                                    @else 
-                                    <tr><td colspan="5">No records</td></tr>
-                                    @endif
+                                    @else
+                                    <tr><td colspan="4">No records</td></tr>
+                                    @endif                                
                                 </tbody>
                             </table>
                         </div>
@@ -66,6 +81,7 @@
     </div>
 
 </div>
+
 
 {{ csrf_field() }}
 
@@ -113,8 +129,10 @@
   </div>
 </div>
 
+
 <script>
 $(document).ready(function(){
+    
     var cnt = 0;
     // Tr
     $('#check-all').click(function(){
@@ -154,8 +172,8 @@ $(document).ready(function(){
         console.log(_selected);
         $.ajax({
             type: 'POST',
-            url: "{{ url('product') . '/delete' }}",
-            data: {'_token': $("input[name='_token']").val(),'p_id':_selected},
+            url: "{{ url('sales') . '/delete' }}",
+            data: {'_token': $("input[name='_token']").val(),'transaction_id':_selected},
             dataType: 'json',
             beforeSend: function() {
 
@@ -169,7 +187,7 @@ $(document).ready(function(){
                         $(this).prop('checked', false);
                     });
                     for(var x=0; x < _selected.length; x++) {
-                        $("#pid_"+ _selected[x]).remove();
+                        $("#pcid_"+ _selected[x]).remove();
                     }
                     $(".chk").each(function(){                        
                         _hasChecked = true;
@@ -199,7 +217,6 @@ $(document).ready(function(){
 
         return (_selected) ? true : false;
     }
-
 
 });
 </script>

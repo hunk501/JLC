@@ -34,6 +34,7 @@ class HomeRental extends Controller
 
         $output = [];
         $output['content'] = $content;
+        $output['page_name'] = 'rental';
         
         $categories = MdlRentalCategory::all();
         $output['categories'] = $categories;
@@ -81,7 +82,7 @@ class HomeRental extends Controller
         //echo url('rent_prod/view');
         //die();
         //dd($product);
-        return view('shop.rental_product_view')->with(['product'=>$product,'content'=>$content]);
+        return view('shop.rental_product_view')->with(['product'=>$product,'content'=>$content,'page_name'=>'rental']);
     }
 
     public function add_to_cart(Request $request) {

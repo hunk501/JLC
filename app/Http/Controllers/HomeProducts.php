@@ -15,7 +15,26 @@ class HomeProducts extends Controller
         $default_link_id = 0;
         $output = [];
         
-        $categories = MdlProductCategory::all();
+        $content = [
+            'breadcrumb' => [
+                [
+                    'label' => "Home",
+                    'href'  => url('/'),
+                    'class' => ''
+                ],
+                [
+                    'label' => "Products",
+                    'href'  => url('products'),
+                    'class' => 'active'
+                ]
+            ],
+            'title' => 'Products'
+        ];        
+        $output['content'] = $content;
+        $output['page_name'] = 'products';
+
+        // Show where page_type = NULL only
+        $categories = MdlProductCategory::whereNull('page_type')->get();
         $output['categories'] = $categories;
 
         if($request->input('pcid')) { // Check if Categories exists
@@ -29,6 +48,7 @@ class HomeProducts extends Controller
 
             //dd(DB::getQueryLog());
             $output['search'] = $pd;
+            //dd(count($pd));
         }
         else {
             // Set the default lists for products

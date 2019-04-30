@@ -17,6 +17,7 @@
   <link href="{{ asset('css/camera.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/jquery.bxslider.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/camera.css') }}" rel="stylesheet" />
 
   <!-- Theme skin -->
   <link href="{{ asset('color/default.css') }}" rel="stylesheet" />
@@ -88,17 +89,20 @@
               <div class="navigation">
                 <nav>
                   <ul class="nav topnav">
-                    <li class="dropdown">
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='home')?'active':'' }} ">
                       <a href="{{ url('/') }}"><i class="icon-home"></i> Home</a>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='products')?'active':'' }} ">
                       <a href="{{ url('products') }}"><i class="icon-list"></i> Products </a>                    
                     </li>
-                    <li>
-                      <a href="{{ url('rental') }}"><i class="icon-list"></i> Rental </a>
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='rental')?'active':'' }} ">
+                      <a href="{{ url('rental') }}"><i class="icon-code-fork"></i> Rental </a>
                     </li>
-                    <li>
-                      <a href="{{ url('/login') }}">Sign In </a>
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='services')?'active':'' }} ">
+                      <a href="{{ url('services') }}"><i class="icon-cog"></i> Services</a>
+                    </li>
+                    <li class="dropdown {{ (!empty($page_name) && $page_name=='projects')?'active':'' }} ">
+                      <a href="{{ url('projects') }}"><i class="icon-cogs"></i> Projects</a>
                     </li>
                   </ul>
                 </nav>
@@ -210,6 +214,11 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="{{ asset('js/custom.js') }}"></script>
+
+  @if(!empty($page_name) && $page_name == 'home')
+  <script src="{{ asset('js/camera/camera.js') }}"></script>
+  <script src="{{ asset('js/camera/setting.js') }}"></script>
+  @endif
 
 
 </body>

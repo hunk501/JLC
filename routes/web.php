@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    //return view('welcome');
-    return view('index');
-});
+Route::get('/', 'Index@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -47,6 +44,12 @@ Route::any('/rent_prod/add/{id}', 'RentalProduct@add');
 Route::any('/rent_prod/edit/{pc_id}/{p_id}', 'RentalProduct@edit');
 Route::post('/rent_prod/delete', 'RentalProduct@delete');
 
+// CMS Sales
+Route::get('/sales', 'Sales@index');
+Route::any('/sales/edit/{id}', 'Sales@edit');
+Route::post('/sales/delete', 'Sales@delete');
+
+
 // Application
 Route::get('/application', 'Application@index')->name('application');
 Route::post('/application/compute', 'Application@compute');
@@ -65,5 +68,11 @@ Route::get('/checkout/confirm', 'Checkout@confirm');
 Route::get('/checkout/thankyou', 'Checkout@thankyou');
 
 Route::get('/orders', 'Orders@lists');
+
+Route::get('/services', 'HomeServices@index');
+Route::get('/services/view/{id}', 'HomeServices@view');
+
+Route::get('/projects', 'HomeProjects@index');
+Route::get('/projects/view/{id}', 'HomeProjects@view');
 
 

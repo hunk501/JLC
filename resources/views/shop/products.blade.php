@@ -1,5 +1,31 @@
 @extends('layouts.shop')
 
+@section('breadcrumb')
+<section id="inner-headline">
+    <div class="container">
+    <div class="row">
+        <div class="span12">
+        <div class="inner-heading">
+            <ul class="breadcrumb">
+                @if(isset($content['breadcrumb']))
+                    @foreach($content['breadcrumb'] as $bc)
+                        @if(!empty($bc['class']))
+                        <li class="active">{{ $bc['label'] }}</li>
+                        @else
+                        <li><a href="{{ $bc['href'] }}">{{ $bc['label'] }}</a> <i class="icon-angle-right"></i></li>
+                        @endif                    
+                    @endforeach
+                @endif
+            </ul>
+
+            <h2>{{ $content['title'] }}</h2>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+@endsection
+
 @section('content')
 <section id="content">
     <div class="container">
@@ -73,32 +99,36 @@
                 @endif                
                 
 
-                @if(isset($search)) 
-                    @foreach($search as $product)
-                    <article>
-                        <div class="row">
-                            <div class="span8">
-                                <div class="post-image">
-                                    <div class="post-heading">
-                                        <h3><a href="#">{{ $product->name }}</a></h3>
-                                    </div>
+                @if(isset($search))                     
+                    @if(count($search))
+                        @foreach($search as $product)
+                        <article>
+                            <div class="row">
+                                <div class="span8">
+                                    <div class="post-image">
+                                        <div class="post-heading">
+                                            <h3><a href="#">{{ $product->name }}</a></h3>
+                                        </div>
 
-                                    <img src="img/dummies/blog/img1.jpg" alt="" />
-                                </div>
-                                <div class="meta-post">
-                                    <ul>                            
-                                        <li>Status <a href="#" class="author">{{ ($product->status) ? 'Active':'In-Active' }}</a></li>
-                                        <li>Stock <a href="#" class="date">{{ $product->stock }}</a></li>                            
-                                    </ul>
-                                </div>
-                                <div class="post-entry">
-                                <p>{{ $product->description }}</p>
-                                <a href="#" class="readmore">Read more <i class="icon-angle-right"></i></a>
+                                        <img src="img/dummies/blog/img1.jpg" alt="" />
+                                    </div>
+                                    <div class="meta-post">
+                                        <ul>                            
+                                            <li>Status <a href="#" class="author">{{ ($product->status) ? 'Active':'In-Active' }}</a></li>
+                                            <li>Stock <a href="#" class="date">{{ $product->stock }}</a></li>                            
+                                        </ul>
+                                    </div>
+                                    <div class="post-entry">
+                                    <p>{{ $product->description }}</p>
+                                    <a href="#" class="readmore">Read more <i class="icon-angle-right"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
-                    @endforeach
+                        </article>
+                        @endforeach
+                    @else
+                    <h1>No match result</h1>
+                    @endif
                 @endif
 
                 <!-- <div id="pagination">

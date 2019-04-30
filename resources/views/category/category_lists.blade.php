@@ -7,7 +7,7 @@
             <div class="col-lg-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">                        
-                        <li class="breadcrumb-item active" aria-current="page">Product Categories</li>
+                        <li class="breadcrumb-item active" aria-current="page">Categories</li>
                     </ol>
                 </nav> 
             </div>
@@ -27,7 +27,7 @@
                                     <tr>
                                         <th><input type="checkbox" id="check-all"></th>                                        
                                         <th>Name</th>
-                                        <th>Image</th>  
+                                        <th>Page Type</th>  
                                         <th></th>                                      
                                     </tr>
                                 </thead>
@@ -37,7 +37,7 @@
                                         <tr id="pcid_{{ $record->pc_id }}">
                                             <td><input type="checkbox" class="chk" name="chk[]" value="{{ $record->pc_id }}"/></td>                                            
                                             <td>{{ $record->name }}</td>
-                                            <td>{{ $record->image_url }}</td>
+                                            <td><span class="badge">{{ ucfirst($record->page_type) }}</span></td>
                                             <td>
                                                 <a href="{{ url('category') .'/edit/'. $record->pc_id }}">[Edit]</a>&nbsp;|
                                                 <a href="{{ url('product') .'/'. $record->pc_id }}">[ <span class="badge">{{ count($record->getProducts) }}</span> Products]</a>&nbsp;

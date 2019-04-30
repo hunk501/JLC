@@ -53,8 +53,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('category') }}">Product Category</a></li>
+                                    @if(Auth::user()->user_level == 1)
+                                    <li><a href="{{ url('category') }}">Categories</a></li>
                                     <li><a href="{{ url('rent_cat') }}">Rental</a></li>
+                                    <li><a href="{{ url('sales') }}">Reports</a></li>
+                                    @elseif(Auth::user()->user_level == 2)
+                                    <li><a href="{{ url('sales') }}">My Application</a></li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
