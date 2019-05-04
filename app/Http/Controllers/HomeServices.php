@@ -43,7 +43,7 @@ class HomeServices extends Controller
         ];
 
         $arrProducts = [];
-        $products = $categories->getProducts;
+        $products = (!empty($categories->getProducts)) ? $categories->getProducts : [];
         foreach($products as $product) {
             $p = $product;
             $random = rand(1,3);
