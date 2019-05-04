@@ -84,5 +84,9 @@
 
     <!-- Scripts -->    
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'wysiwg' );
+    </script>
 </body>
 </html>

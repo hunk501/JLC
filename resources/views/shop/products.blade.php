@@ -89,7 +89,7 @@
                                     </ul>
                                 </div>
                                 <div class="post-entry">
-                                <p>{{ $product->description }}</p>
+                                <?=html_entity_decode($product->description, ENT_HTML5|ENT_COMPAT|ENT_QUOTES);?>
                                 <a href="#" class="readmore">Read more <i class="icon-angle-right"></i></a>
                                 </div>
                             </div>

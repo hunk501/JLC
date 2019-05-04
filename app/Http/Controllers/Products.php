@@ -51,7 +51,7 @@ class Products extends Controller
             // Create Product
             MdlProduct::create([
                 'name' => $request->input('name'),
-                'description' => $request->input('description'),
+                'description' => htmlspecialchars($request->input('description')),
                 'pc_idfk' => $pc_id,
                 'image_url' => $filename,
                 'stock' => $request->input('stock'),
@@ -92,7 +92,7 @@ class Products extends Controller
             }
             
             $product->name = $request->input('name');
-            $product->description = $request->input('description');            
+            $product->description = htmlspecialchars($request->input('description'));            
             $product->stock = $request->input('stock');
             $product->save();
 
