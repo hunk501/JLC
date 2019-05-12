@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <div class="form-action">
-                                    <textarea name="description">{{ old('description') }}</textarea>
+                                    <textarea id="wysiwg" name="description">{{ old('description') }}</textarea>
                                     @if($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>

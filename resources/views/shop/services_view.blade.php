@@ -43,7 +43,7 @@
                     <!-- end flexslider -->
                     </div>
 
-                    <p>{{ $product->description }}</p>
+                    <?=html_entity_decode($product->description, ENT_HTML5|ENT_COMPAT|ENT_QUOTES);?>
 
                 </article>                
             </div>        

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Validator;
 use App\MdlProduct;
@@ -17,12 +18,18 @@ class Sales extends Controller
 
     public function index(Request $request) {
         // Lists 
-        $records = MdlCart::all();//MdlProductCategory::all();
+        //$records = MdlCart::all();//MdlProductCategory::all();
         // foreach($records as $key => $record) {
         //     echo"<pre>";print_r($record->transaction_id);
         //     echo"<pre>";print_r($record->getProduct->toArray());
         // }
-        // die();
+
+        if(Auth::user()->user_level == 1) {
+            $records = MdlCart::all();
+        } else {
+            $records = MdlCart::where("user_id", Auth::user()->id)->get();
+        }
+
         return view('sales.lists')->with(['records'=>$records]);
     }
 

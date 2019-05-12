@@ -54,7 +54,7 @@ class RentalProduct extends Controller
             // Create Product
             MdlRentalProduct::create([
                 'name' => $request->input('name'),
-                'description' => $request->input('description'),
+                'description' => htmlspecialchars($request->input('description')),
                 'rc_idfk' => $rc_id,
                 'image_url' => $filename,
                 'stock' => $request->input('stock'),
@@ -98,7 +98,7 @@ class RentalProduct extends Controller
             }
             
             $product->name = $request->input('name');
-            $product->description = $request->input('description');            
+            $product->description = htmlspecialchars($request->input('description'));            
             $product->stock = $request->input('stock');
             $product->rental_type = $request->input('rental_type');
             $product->rental_rate = $request->input('rental_rate');            

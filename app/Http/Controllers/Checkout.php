@@ -5,6 +5,8 @@ use Auth;
 use Session;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Mailcheckout;
 use App\MdlRentalCategory;
 use App\MdlRentalProduct;
 use App\MdlCart;
@@ -31,7 +33,7 @@ class Checkout extends Controller
             $tmp1 = $request->session()->pull('total_qty');
 
             // Save Cart products
-            $cart_session = $request->session()->pull('cart');
+            $cart_session = $request->session()->get('cart');
             foreach($cart_session as $rp_id => $qty) {
                 MdlCart::create([
                     'rp_idfk' => $rp_id,
@@ -55,11 +57,47 @@ class Checkout extends Controller
     public function thankyou(Request $request) {
         
         if($request->session()->has('thankyou')) {
+
+            // Send Email
+            $this->sendEmail($request);
+
             $tmp = $request->session()->pull('thankyou');
             return view('shop.thankyou');
         } else {
             return redirect('/cart');
         }        
+    }
+
+    private function sendEmail(Request $request) {
+        $cart_session = $request->session()->pull('cart');
+        
+        $records = MdlCart::where("user_id", Auth::user()->id)
+                    ->whereIn("rp_idfk", array_keys($cart_session))
+                    ->get();
+
+        $total = 0;
+        $arrProducts = [];
+        foreach($records as $record) {
+            $product = $record->getProduct;            
+
+            $qty = $record['qty'];
+            $rental_rate = (int)$product['rental_rate'];
+            $amount = ( $rental_rate * $qty);
+            $total += $amount;
+            $product->amount = $amount;
+            $product->qty = $qty;   
+            
+            $arrProducts[] = $product;
+        }
+
+        //echo Auth::user()->id;
+        //echo $total ."<br>";
+        //dd($arrProducts);
+        $output = [
+            'total' => $total,
+            'products' => $arrProducts
+        ];
+        Mail::to(Auth::user()->email)->send(new Mailcheckout($output));
     }
     
 }

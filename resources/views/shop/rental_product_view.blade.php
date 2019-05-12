@@ -55,7 +55,7 @@
                             </ul>
                         </div>
                         <div class="post-entry">
-                            <p>{{ $product->description }}</p>
+                            <?=html_entity_decode($product->description, ENT_HTML5|ENT_COMPAT|ENT_QUOTES);?>
                             @if($product->stock)
                             <a href="#" class="add-to-cart btn btn-primary"><i class="icon-shopping-cart"></i> Add to Cart</a>
                             @else
