@@ -42,6 +42,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(empty($page_type))
                             <div class="form-group">
                                 <label>Stock</label>
                                 <div class="form-action">
@@ -57,10 +58,13 @@
                                     @endif
                                 </div>
                             </div>
+                            @else
+                            <input type="hidden" name="stock" value="0"/>
+                            @endif
                             <div class="form-group">
                                 <label>Description</label>
                                 <div class="form-action">
-                                    <textarea name="description">{{ old('description') }}</textarea>
+                                    <textarea id="wysiwg" name="description">{{ old('description') }}</textarea>
                                     @if($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>

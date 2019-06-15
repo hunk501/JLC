@@ -49,6 +49,9 @@ Route::get('/sales', 'Sales@index');
 Route::any('/sales/edit/{id}', 'Sales@edit');
 Route::post('/sales/delete', 'Sales@delete');
 
+// CMS Quotes
+Route::get('/quotes', 'RequestQuotes@lists');
+Route::post('/quotes/delete', 'RequestQuotes@delete');
 
 // Application
 Route::get('/application', 'Application@index')->name('application');
@@ -71,6 +74,7 @@ Route::get('/orders', 'Orders@lists');
 
 Route::get('/services', 'HomeServices@index');
 Route::get('/services/view/{id}', 'HomeServices@view');
+Route::post('/services/quote', 'HomeServices@sendQuote');
 
 Route::get('/projects', 'HomeProjects@index');
 Route::get('/projects/view/{id}', 'HomeProjects@view');

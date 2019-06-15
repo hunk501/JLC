@@ -66,7 +66,10 @@ class RentalProduct extends Controller
             Session::flash('success', 'Product has been created!');
             return redirect('rent_prod'.'/'.$rc_id);
         }
-        return view('rental.product_add')->with(['rc_id'=>$rc_id,'category_name'=>$category->category_name]);
+        return view('rental.product_add')->with([
+            'rc_id'=>$rc_id,
+            'category_name'=>$category->category_name,
+            'ckeditor'=>TRUE]);
     }
 
     public function edit(Request $request, $rc_id, $rp_id) {
@@ -108,7 +111,12 @@ class RentalProduct extends Controller
             return redirect('rent_prod'.'/'.$rc_id);
         }
 
-        return view('rental.product_edit')->with(['rc_id'=>$rc_id,'rp_id'=>$rp_id,'category_name'=>$category->category_name,'product'=>$product]);
+        return view('rental.product_edit')->with([
+            'rc_id'=>$rc_id,
+            'rp_id'=>$rp_id,
+            'category_name'=>$category->category_name,
+            'product'=>$product,
+            'ckeditor'=>TRUE]);
     }
 
     public function delete(Request $request) {  

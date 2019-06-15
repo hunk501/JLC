@@ -57,6 +57,7 @@
                                     <li><a href="{{ url('category') }}">Categories</a></li>
                                     <li><a href="{{ url('rent_cat') }}">Rental</a></li>
                                     <li><a href="{{ url('sales') }}">Reports</a></li>
+                                    <li><a href="{{ url('quotes') }}">Request Quotes</a></li>
                                     @elseif(Auth::user()->user_level == 2)
                                     <li><a href="{{ url('sales') }}">My Application</a></li>
                                     @endif
@@ -83,10 +84,12 @@
     </div>
 
     <!-- Scripts -->    
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
+    @if(isset($ckeditor))
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'wysiwg' );
     </script>
+    @endif
 </body>
 </html>

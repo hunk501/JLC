@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MdlProductCategory;
 use App\MdlProduct;
+use App\MdlRequestQuote;
 
 class HomeServices extends Controller
 {
@@ -90,6 +91,22 @@ class HomeServices extends Controller
             $output['product'] = $product;
             return view('shop.services_view')->with($output);
         }
+    }
+
+    public function sendQuote(Request $request) {
+
+        MdlRequestQuote::create([
+            "service_id" => $request->input('service_id'),
+            "email" => $request->input('email'),
+            "contact" => $request->input('contact'),
+            "name" => $request->input('name'),
+            "message" => $request->input('message')
+        ]);
+
+        echo json_encode([
+            "status" => TRUE,
+            "message" => 'Successful'
+        ]);
     }
 
 }

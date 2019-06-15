@@ -21,7 +21,11 @@ class Products extends Controller
             $records = MdlProduct::where('pc_idfk', $pc_id)->orderBy('name', 'ASC')->get();
             $category = MdlProductCategory::find($pc_id);
             //dd($category->name);
-            return view('product.product_lists')->with(['pc_id'=>$pc_id,'records'=>$records,'pc_name'=>$category->name]);
+            return view('product.product_lists')->with([
+                'pc_id'=>$pc_id,
+                'records'=>$records,
+                'pc_name'=>$category->name,
+                'page_type'=>$category->page_type]);
         }        
     }
 
@@ -61,13 +65,19 @@ class Products extends Controller
             Session::flash('success', 'Product has been created!');
             return redirect('product'.'/'.$pc_id);
         }
-        return view('product.product_form')->with(['pc_id'=>$pc_id,'pc_name'=>$category->name]);
+        return view('product.product_form')->with([
+            'pc_id'=>$pc_id,
+            'pc_name'=>$category->name,
+            'page_type'=>$category->page_type,
+            'ckeditor'=>TRUE]);
     }
 
     public function edit(Request $request, $pc_id, $p_id) {
         $category = MdlProductCategory::find($pc_id);
         $product = MdlProduct::find($p_id);
         
+        //dd($category->toArray());
+
         if(empty($category) || empty($product)) { die('Wala'); }
 
         if($request->isMethod('post')) {
@@ -100,7 +110,13 @@ class Products extends Controller
             return redirect('product'.'/'.$pc_id);
         }
 
-        return view('product.product_edit')->with(['pc_id'=>$pc_id,'p_id'=>$p_id,'pc_name'=>$category->name,'product'=>$product]);
+        return view('product.product_edit')->with([
+            'pc_id'=>$pc_id,
+            'p_id'=>$p_id,
+            'pc_name'=>$category->name,
+            'product'=>$product,
+            'page_type'=>$category->page_type,
+            'ckeditor'=>TRUE]);
     }
 
     public function delete(Request $request) {  

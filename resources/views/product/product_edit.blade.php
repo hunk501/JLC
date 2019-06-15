@@ -49,6 +49,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(empty($page_type))
                             <div class="form-group">
                                 <label>Stock</label>
                                 <div class="form-action">
@@ -64,6 +65,9 @@
                                     @endif
                                 </div>
                             </div>
+                            @else 
+                            <input type="hidden" name="stock" value="0"/>
+                            @endif
                             <div class="form-group">
                                 <label>Description</label>
                                 <div class="form-action">
@@ -76,7 +80,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success">Update Product</button>
+                                <input type="hidden" name="page_type" value="{{ $page_type }}"/>
+                                <button class="btn btn-success">Update Record</button>
                             </div>
                         </div>
                         {{ csrf_field() }}
