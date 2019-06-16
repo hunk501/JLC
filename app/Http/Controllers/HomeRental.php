@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MdlRentalCategory;
 use App\MdlRentalProduct;
+use App\MdlSettings;
 
 class HomeRental extends Controller
 {
@@ -49,6 +50,7 @@ class HomeRental extends Controller
         }
         shuffle($products); // shuffle an array
         $output['products'] = $products;
+        $output['settings'] = $this->getSettings();
 
         //dd($output);
         return view('shop.rental')->with($output);
@@ -82,7 +84,12 @@ class HomeRental extends Controller
         //echo url('rent_prod/view');
         //die();
         //dd($product);
-        return view('shop.rental_product_view')->with(['product'=>$product,'content'=>$content,'page_name'=>'rental']);
+        $settings = $output['settings'] = $this->getSettings();
+        return view('shop.rental_product_view')->with([
+            'product'=>$product,
+            'content'=>$content,
+            'page_name'=>'rental',
+            'settings'=>$settings]);
     }
 
     public function add_to_cart(Request $request) {
@@ -122,5 +129,14 @@ class HomeRental extends Controller
         $output['cart_products'] = $cart_products;
 
         echo json_encode($output);
+    }
+
+    private function getSettings() {
+        $output = [];
+        $records = MdlSettings::all();
+        foreach($records as $k => $record) {
+            $output[ $record->key ] = $record->value;
+        }
+        return $output;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MdlProductCategory;
 use App\MdlProduct;
+use App\MdlSettings;
 
 class HomeProjects extends Controller
 {
@@ -52,6 +53,7 @@ class HomeProjects extends Controller
             $arrProducts[] = $p;
         }
         $output['products'] = $arrProducts;
+        $output['settings'] = $this->getSettings();
 
         //dd($arrProducts);
         //die();
@@ -88,7 +90,17 @@ class HomeProjects extends Controller
                 'class' => 'active'
             ];
             $output['product'] = $product;
+            $output['settings'] = $this->getSettings();
             return view('shop.projects_view')->with($output);
         }
+    }
+
+    private function getSettings() {
+        $output = [];
+        $records = MdlSettings::all();
+        foreach($records as $k => $record) {
+            $output[ $record->key ] = $record->value;
+        }
+        return $output;
     }
 }

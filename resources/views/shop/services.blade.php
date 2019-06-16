@@ -30,16 +30,9 @@
 <section id="content">
       <div class="container">
         <div class="row">
-
-          <div class="span12">
-            <h4 class="title">What we do</h4>
-            <p>
-              Ei mel semper vocent persequeris, nominavi patrioque vituperata id vim, cu eam gloriatur philosophia deterruisset. Meliore perfecto repudiare ea nam, ne mea duis temporibus. Id quo accusam consequuntur, eum ea debitis urbanitas. Nibh reformidans vim ne.
-            </p>
-
-
-          </div>
-
+            @if(isset($settings['services']))
+            <?=html_entity_decode($settings['services'], ENT_HTML5|ENT_COMPAT|ENT_QUOTES);?>
+            @endif
         </div>
 
 

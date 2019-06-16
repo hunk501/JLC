@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MdlProductCategory;
 use App\MdlProduct;
+use App\MdlSettings;
 
 class HomeProducts extends Controller
 {
@@ -61,8 +62,18 @@ class HomeProducts extends Controller
             }
         }
         $output['default'] = $default;
-        $output['default_link_id'] = $default_link_id;        
+        $output['default_link_id'] = $default_link_id;  
+        $output['settings'] = $this->getSettings();      
         //dd($output);
         return view('shop.products')->with($output);
+    }
+
+    private function getSettings() {
+        $output = [];
+        $records = MdlSettings::all();
+        foreach($records as $k => $record) {
+            $output[ $record->key ] = $record->value;
+        }
+        return $output;
     }
 }

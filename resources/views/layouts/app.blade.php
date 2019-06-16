@@ -58,6 +58,7 @@
                                     <li><a href="{{ url('rent_cat') }}">Rental</a></li>
                                     <li><a href="{{ url('sales') }}">Reports</a></li>
                                     <li><a href="{{ url('quotes') }}">Request Quotes</a></li>
+                                    <li><a href="{{ url('settings') }}">Settings</a></li>
                                     @elseif(Auth::user()->user_level == 2)
                                     <li><a href="{{ url('sales') }}">My Application</a></li>
                                     @endif

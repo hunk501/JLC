@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\MdlProductCategory;
 use App\MdlProduct;
 use App\MdlRequestQuote;
+use App\MdlSettings;
 
 class HomeServices extends Controller
 {
@@ -53,8 +54,9 @@ class HomeServices extends Controller
             $arrProducts[] = $p;
         }
         $output['products'] = $arrProducts;
+        $output['settings'] = $this->getSettings();
 
-        //dd($arrProducts);
+        //dd($output);
         //die();
         return view('shop.services')->with($output);
     }
@@ -89,6 +91,7 @@ class HomeServices extends Controller
                 'class' => 'active'
             ];
             $output['product'] = $product;
+            $output['settings'] = $this->getSettings();
             return view('shop.services_view')->with($output);
         }
     }
@@ -107,6 +110,15 @@ class HomeServices extends Controller
             "status" => TRUE,
             "message" => 'Successful'
         ]);
+    }
+
+    private function getSettings() {
+        $output = [];
+        $records = MdlSettings::all();
+        foreach($records as $k => $record) {
+            $output[ $record->key ] = $record->value;
+        }
+        return $output;
     }
 
 }

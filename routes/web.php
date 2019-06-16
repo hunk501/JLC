@@ -53,6 +53,10 @@ Route::post('/sales/delete', 'Sales@delete');
 Route::get('/quotes', 'RequestQuotes@lists');
 Route::post('/quotes/delete', 'RequestQuotes@delete');
 
+// CMS Settings
+Route::get('/settings', 'Settings@index')->name('settings');
+Route::post('/settings/update', 'Settings@update');
+
 // Application
 Route::get('/application', 'Application@index')->name('application');
 Route::post('/application/compute', 'Application@compute');

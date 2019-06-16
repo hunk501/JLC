@@ -6,6 +6,7 @@ use Session;
 use Illuminate\Http\Request;
 use App\MdlRentalCategory;
 use App\MdlRentalProduct;
+use App\MdlSettings;
 
 class Cart extends Controller 
 {
@@ -52,6 +53,7 @@ class Cart extends Controller
 
         $output = [];
         $output['content'] = $content;
+        $output['settings'] = $this->getSettings();
         $total = 0;
 
         if($request->session()->has('cart')) {
@@ -114,8 +116,10 @@ class Cart extends Controller
 
                 // Get Total qty
                 $tt = 0;
-                foreach($request->session()->get('cart') as $k => $v) {
-                    $tt += $v;
+                if(!empty($request->session()->get('cart'))) {
+                    foreach($request->session()->get('cart') as $k => $v) {
+                        $tt += $v;
+                    }
                 }
                 $request->session()->put('total_qty', $tt);
                 $request->session()->flash('cart_update', 'Cart product has been updated!');
@@ -156,5 +160,14 @@ class Cart extends Controller
         //die();
         //dd($content);
         return view('shop.rental_product_view')->with(['product'=>$product,'content'=>$content]);
+    }
+
+    private function getSettings() {
+        $output = [];
+        $records = MdlSettings::all();
+        foreach($records as $k => $record) {
+            $output[ $record->key ] = $record->value;
+        }
+        return $output;
     }
 }

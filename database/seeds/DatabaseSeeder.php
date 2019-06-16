@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UpdateProductCategory::class);
 
-        $this->call(UpdateHeaderFooter::class);
+        //$this->call(UpdateHeaderFooter::class);
     }
 }
